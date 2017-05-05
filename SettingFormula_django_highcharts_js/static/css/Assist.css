@@ -1,0 +1,385 @@
+/* 数据采集 */
+
+.filterResult{
+	margin-right: 20px;
+}
+
+.filterResult i{
+    color: #24BAE0;
+}
+
+/* filter_form */
+#filter_form .option{
+    color: #767676;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000;
+    padding-left: 10px;
+}
+
+#filter_form .option:before{
+    content: "+ ";    
+    text-align: center;
+    color: #767676;    
+}
+
+#filter_form .option.active:before{
+    content: "- ";    
+    text-align: center;
+    color: #767676;
+}
+
+#filter_form .option .desaparece{
+    display: none;    
+}
+
+#filter_form .suboption{
+    color: #767676;
+    font-size: 12px;   
+    margin-right: 7px;
+    margin-bottom: 10px;
+    display: none;
+    padding-left: 22px;
+}
+#filter_form .suboption.active{
+    display: block;
+}
+
+#filter_form .butContent{
+    /* margin-left: 30px; */
+    margin-top: 3px;
+}
+
+#filter_form .f_criterio{
+    float: left;
+    width: 33%;
+    font-size: 11px;
+    margin-right: 5px;
+}
+
+#filter_form .subcriterios{
+    margin-bottom: 7px;
+    margin-top: 2px;
+    display: none;
+    background: #fdfdfd;
+}
+
+#filter_form .subcriterios.active{
+    display: block;
+}
+
+#filter_form input[type="checkbox"]{
+    
+}
+
+/* filter content */
+.content_child{
+    /* 模块主要内容的位置调整 */
+}
+
+.Quality_content_child a{
+    text-decoration: none;
+}
+
+.data_style{
+    font-size: 15px;
+    font-weight: bold;
+    color: green;
+}
+
+.icon_color_green{
+    color: green;
+    font-weight: bold;
+}
+
+.icon_color_yellow{
+    color: #ffe66f;
+}
+
+.icon_color_blue{
+    color: #2894ff;
+    font-weight: bold;
+}
+
+.tag_yellow{
+    color: yellow;
+    font-weight: bold;
+}
+
+.tag_green{
+    color: green;
+    font-weight: bold;
+}
+
+.tag_red{
+    color: red;
+    font-weight: bold;
+}
+
+.filter_head_bg_little{
+    background-color: #fcfcfc;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.filter_head_bg_gray{
+    background-color: #f0f0f0;
+}
+
+.filter_link{
+    color: #000093;
+    font-size: 15px;
+}
+
+.glyphicon-grain{
+    color: #007500;
+    padding-left: 12px;
+}
+
+/* 数据采集 面板 */
+.data_collection_panel{
+    
+}
+
+.data_collection_panel .panel-heading{
+    background-color: #d2e9ff;
+}
+
+.data_collection_panel .panel-heading h3{
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.data_collection_panel .panel-body{
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+.data_collection_panel .panel-heading .panel-title .CompletedStyle{
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 20px;
+    color:#750000;
+}
+
+.panel-body .btn{
+    background-color: #E0E0E0;
+    color: #000;
+    font-weight: bold;
+    padding-top: 0;
+    padding-bottom: 2px;
+}
+
+/* 实践：用户操作界面 */
+.caption_style{
+    background-color: #d0d0d0;
+    color: #000;
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.practice_content{
+    width: 600px;
+}
+
+.practice_content input{
+    margin-right: 10px;
+    margin-left: 50px;
+}
+
+.Quality_content{
+    width: 400px;
+}
+
+.DC_Quality_content{
+    width: 400px;
+}
+
+.practice_table_style{
+    background-color: #f0f0f0;
+}
+
+.practice_table_style tr{
+    text-align: center;
+    font-size: 13px;
+    color: #000;
+}
+
+.practice_table_style tr > td > a{
+    color: blue;
+}
+
+.practice_thead_style{
+    font-size: 15px;
+    font-weight: bold;
+    color: #000;
+}
+
+.practice_thead_style th{
+    text-align: center;
+    font-size: 15px;
+}
+
+.VariablesIntroduction tr > th{
+    width: 140px;
+    text-align: right;
+}
+
+.VariablesIntroduction tr > td{
+    text-align: left;
+}
+
+.Quality_table_style,
+.TooltipContentTableStyle{
+    background-color: #f0f0f0;
+}
+
+.Quality_table_style tr > td > a{
+    color: blue;
+}
+
+.Quality_table_style{
+    font-size: 15px;
+    color: #000;
+}
+
+.Quality_table_style th{
+    text-align: center;
+    font-size: 15px;
+}
+
+.TooltipContentTableStyle th{
+    text-align: center;
+    font-size: 13px;
+}
+
+
+
+.WeightView tr > th,
+.WeightView tr > td{
+    text-align: center;
+    font-size: 14px;
+    padding-top: 20px;
+    border: solid 1px #e0e0e0;
+}
+
+/* 数据采集 -- 权重设置部分 */
+.DC_Weight .Content_p{
+    text-indent: 2em;
+    margin-bottom: 0px;
+}
+
+.QualityWeight .Content_p{
+    margin-bottom: 0px;
+}
+
+.QualityWeight tr > td{
+    text-align: center;
+}
+
+.QualityWeight tr > td > a{
+    text-decoration: none;
+}
+
+/* 数据采集 -- 上传文件部分 */
+.upload_form{
+    text-align:center;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+/* 数据采集模块  公式算出的值 */
+.DC_value{
+    font-size: 15px;
+    color: #930000;
+}
+
+/* 数据分析：综合分析模块 */
+.CA_border_style{
+    padding: 3px;
+    padding-top: 10px;
+    border: 1px solid #fff;
+    background-color: #dff0d0;
+}
+
+.CA_border_style table > thead > tr{
+    background-color: #dff0d8;
+}
+.CA_border_style table > thead > tr > th,
+.CA_border_style table > tbody > tr > td{
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+}
+
+.ShowPicture strong{
+    display: block;
+    text-align: center;
+    font-size: 15px;
+    background-color: #d0d0d0;
+    padding: 8px;
+}
+
+.unFinished_tip{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.IndicatorNameStyle{
+    color: #950000;
+}
+
+.ComAnalyseSelect_style{
+    margin-top: 5px;
+}
+
+.ComAnalyseSelect_style select{
+    margin-right: 10px;
+}
+
+.ComAnalyseSelect_style .glyphicon-circle-arrow-right{
+    color: #950000;
+}
+
+/* 模态框 
+body.modal-open,
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+    margin-right: 0;
+}
+.modal {
+    top: 10px;
+    bottom: 10px;
+    padding: 0;
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+    background-clip: padding-box;
+
+}
+.modal.container {
+    max-width: none;
+}
+*/
+
+
+.uploadStyle{
+    margin-top: 10px;
+    margin-right: 5px;
+    border: 1px solid #950000;
+}
+
+.uploadStyle h1{
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
