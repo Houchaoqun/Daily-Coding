@@ -11,7 +11,6 @@
         </title>
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/Water.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/Assist.css' %}">
     </head>
 
     <body>
@@ -300,173 +299,206 @@
 </script>
 
 <script>
-    {% if x_Value and k_Value and b_Value %}
-    $(function () {
-        var x = "{{ x_Value }}", b = "{{ b_Value }}", k = "{{ k_Value }}";
-        var i;
-        var xValue = x.split("_");
-        var bValue = b.split("_");
-        var kValue = k.split("_");  // 未知量的系数
-        // console.log(xValue);
-        // console.log(bValue);
-        // console.log(kValue);
-        // console.log(parseFloat(xValue[2] * kValue[1]) + parseFloat(bValue[1]));
-        // console.log();
+{% if x_Value and k_Value and b_Value %}
+$(function () {
+    var x = "{{ x_Value }}", b = "{{ b_Value }}", k = "{{ k_Value }}";
+    var i;
+    var xValue = x.split("_");
+    var bValue = b.split("_");
+    var kValue = k.split("_");  // 未知量的系数
+    // console.log(xValue);
+    // console.log(bValue);
+    // console.log(kValue);
+    // console.log(parseFloat(xValue[2] * kValue[1]) + parseFloat(bValue[1]));
+    // console.log();
 
-        var data = new Array();
-        // 判断线段的类型：
-        // 1、只有直线
-        // 2、有直线，又有曲线
-        var has_curve = false;
-        // 如果包含子串，则返回大于等于0的索引，否则返回-1
-        
-        for(var k = 0; k < kValue.length; k++){
-            if(kValue[k].indexOf(";")>=0){
-                has_curve = true;
-                break;
-            }
+    var data = new Array();
+    // 判断线段的类型：
+    // 1、只有直线
+    // 2、有直线，又有曲线
+    var has_curve = false;
+    // 如果包含子串，则返回大于等于0的索引，否则返回-1
+    
+    for(var k = 0; k < kValue.length; k++){
+        if(kValue[k].indexOf(";")>=0){
+            has_curve = true;
+            break;
         }
-        
-        // has_curve == true 表示包含曲线
-        if(has_curve == true){
-            console.log("there is curve.");
-            for(i = 0; i < bValue.length; i++){
-                if((xValue[i+1]) && (xValue[i+1].toLowerCase() == "inf")){
-                    xValue[i+1] = 2 * xValue[i] + 40;
-                }
-
-                if(kValue[i].indexOf(";")>=0){
-                    // 曲线处理
-                    coefficient_list = kValue[i].split(";");
-                    var y_0 = 0;
-                    var y_1 = 0;
-                    for(var k = 0; k < coefficient_list.length; k++){
-                        y_0 = y_0 + parseFloat(coefficient_list[k]) * Math.pow(xValue[i], parseInt( coefficient_list.length - k));
-                        y_1 = y_1 + parseFloat(coefficient_list[k]) * Math.pow(xValue[i + 1], parseInt( coefficient_list.length - k));
-                    }
-                    y_0 = y_0 + parseFloat(bValue[i]);
-                    y_0 = y_0.toFixed(2);
-                    data.push([parseFloat(xValue[i]), parseFloat(y_0)]);
-
-                    y_1 = y_1 + parseFloat(bValue[i]);
-                    y_1 = y_1.toFixed(2);
-                    data.push([parseFloat(xValue[i+1]), parseFloat(y_1)]);
-                    
-                }
-                else{
-                    // 直线处理
-                    var y_0 = parseFloat((xValue[i]) * kValue[i]) + parseFloat(bValue[i]);
-                    y_0 = y_0.toFixed(2);
-                    data.push([parseFloat(xValue[i]), parseFloat(y_0)]);
-
-                    var y_1 = parseFloat((xValue[i+1]) * kValue[i]) + parseFloat(bValue[i]);
-                    y_1 = y_1.toFixed(2);
-                    data.push([parseFloat(xValue[i+1]), parseFloat(y_1)]);
-                }
+    }
+    
+    // has_curve == true 表示包含曲线
+    if(has_curve == true){
+        console.log("there is curve.");
+        for(i = 0; i < bValue.length; i++){
+            if((xValue[i+1]) && (xValue[i+1].toLowerCase() == "inf")){
+                xValue[i+1] = 2 * xValue[i] + 40;
             }
 
-            // LineContainer_test
-            $('#LineContainer_test').highcharts({
-                title: {
-                    text: ''
-                },
-                credits: {
-                    enabled: false
-                },
-                xAxis: {
-                    minorTickInterval: 1,
-                    tickInterval: 5,
-                },
-                yAxis: {
-                    title: {
-                        text: null
-                    },
-                    tickInterval: 1
-                },
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'x = {point.x}, y = {point.y}'
-                },
-                series: [{
-                    name: '标准化得分',
-                    data: data,
-                    type: 'spline',
-                }]
-            });
-        }else{
-            console.log("there is only line.");
-            for(i = 0; i < bValue.length; i++){
-                if((xValue[i+1]) && (xValue[i+1].toLowerCase() == "inf")){
-                    xValue[i+1] = 2 * xValue[i] + 80;
+            if(kValue[i].indexOf(";")>=0){
+                // 曲线处理
+                coefficient_list = kValue[i].split(";");
+                var y_0 = 0;
+                var y_1 = 0;
+                var curve_points = new Array();  // 存储曲线多个点，此处设置10个点
+                var curve_points_length = 30;
+                // 初始化为0
+                for(var k =0; k < curve_points_length; k++){
+                    curve_points[k] = 0;
                 }
 
-                // two points to form a line.
-                // console.log("==================");
+                for(var k = 0; k < coefficient_list.length; k++){
+                    // y_0 = y_0 + parseFloat(coefficient_list[k]) * Math.pow(xValue[i], parseInt( coefficient_list.length - k));
+                    // y_1 = y_1 + parseFloat(coefficient_list[k]) * Math.pow(xValue[i + 1], parseInt( coefficient_list.length - k));
+
+                    curve_points[0] = curve_points[0] + parseFloat(coefficient_list[k]) * Math.pow(xValue[i], parseInt(coefficient_list.length - k));
+
+                    for(var t = 1; t < curve_points_length - 1; t++){
+                        // 系数3表示倍数从4到1，中间差3个单位，即step_add的取值范围为[1,4]
+                        // 实践证明：3这个系数的结果比较好，但是仍存在一定的局限性，比如：
+                        // 1、当区间为[0,100]时，[0,25]区间的点比较稀疏，因为step_add的最大值为4，100/4=25导致取不到x=25之前的点。
+                        var step_add = 1 + 3*(curve_points_length-1-t)/(curve_points_length-2);
+                        // console.log(step_add);
+                        curve_points[t] = curve_points[t] + parseFloat(coefficient_list[k]) * Math.pow(parseInt(xValue[i+1]/step_add), parseInt( coefficient_list.length - k));
+                    }
+
+                    curve_points[curve_points_length-1] = curve_points[curve_points_length-1] + parseFloat(coefficient_list[k]) * Math.pow(xValue[i+1], parseInt( coefficient_list.length - k));
+                }
+                // y_0 = y_0 + parseFloat(bValue[i]);
+                // y_0 = y_0.toFixed(2);
+                // data.push([parseFloat(xValue[i]), parseFloat(y_0)]);
+
+                // y_1 = y_1 + parseFloat(bValue[i]);
+                // y_1 = y_1.toFixed(2);
+                // data.push([parseFloat(xValue[i+1]), parseFloat(y_1)]);
+                
+                curve_points[0] = (curve_points[0] + parseFloat(bValue[i])).toFixed(2);
+                data.push([parseFloat(xValue[i]), parseFloat(curve_points[0])]);
+
+                for(var t = 1; t < curve_points_length-1; t++){
+                    var step_add = 1 + 3*(curve_points_length-1-t)/(curve_points_length-2);
+                    curve_points[t] = (curve_points[t] + parseFloat(bValue[i])).toFixed(2);
+                    data.push([parseInt(xValue[i+1]/step_add), parseFloat(curve_points[t])]);
+                }
+
+                curve_points[curve_points_length-1] = (curve_points[curve_points_length-1] + parseFloat(bValue[i])).toFixed(2);
+                data.push([parseInt(xValue[i+1]), parseFloat(curve_points[curve_points_length-1])]);
+
+
+            }
+            else{
+                // 直线处理
                 var y_0 = parseFloat((xValue[i]) * kValue[i]) + parseFloat(bValue[i]);
                 y_0 = y_0.toFixed(2);
                 data.push([parseFloat(xValue[i]), parseFloat(y_0)]);
-                // console.log(parseFloat(xValue[i]));
-                // console.log(parseFloat(y_0));
 
                 var y_1 = parseFloat((xValue[i+1]) * kValue[i]) + parseFloat(bValue[i]);
                 y_1 = y_1.toFixed(2);
                 data.push([parseFloat(xValue[i+1]), parseFloat(y_1)]);
-                // console.log(parseFloat(xValue[i+1]));
-                // console.log(parseFloat(y_1));
+            }
+        }
+
+        // LineContainer_test
+        $('#LineContainer_test').highcharts({
+            title: {
+                text: ''
+            },
+            credits: {
+                enabled: false
+            },
+            xAxis: {
+                minorTickInterval: 1,
+                tickInterval: 5,
+            },
+            yAxis: {
+                title: {
+                    text: null
+                },
+                tickInterval: 1
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br />',
+                pointFormat: 'x = {point.x}, y = {point.y}'
+            },
+            series: [{
+                name: '标准化得分',
+                data: data,
+                type: 'spline',
+            }]
+        });
+    }else{
+        console.log("there is only line.");
+        for(i = 0; i < bValue.length; i++){
+            if((xValue[i+1]) && (xValue[i+1].toLowerCase() == "inf")){
+                xValue[i+1] = 2 * xValue[i] + 80;
             }
 
-            $('#LineContainer_test').highcharts({
-                chart: {
-                    height:263, 
-                    backgroundColor: '#f0f0f0'
-                },
-                credits: {
-                    enabled: false
-                },
-                
-                title: {
-                    text: ' '
-                },
-                
-                xAxis: {
-                    minorTickInterval: 1,
-                    tickInterval: 5,
-                },
-                
-                yAxis: {
-                    type: 'linear',
-                    minorTickInterval: 0.1,
-                    tickInterval: 5,
-                    title:{
-                        enabled: false,
-                        text: 'y值'
-                    }
-                },
+            // two points to form a line.
+            // console.log("==================");
+            var y_0 = parseFloat((xValue[i]) * kValue[i]) + parseFloat(bValue[i]);
+            y_0 = y_0.toFixed(2);
+            data.push([parseFloat(xValue[i]), parseFloat(y_0)]);
+            // console.log(parseFloat(xValue[i]));
+            // console.log(parseFloat(y_0));
 
-                legend: {
-                    layout: 'vertical',
-                    backgroundColor: '#f0f0f0',
-                    floating: true,
-                    align: 'left',
-                    x: 30,
-                    verticalAlign: 'top',
-                    y: 30
-                },
-
-                tooltip: {
-                    headerFormat: '<b>{series.name}</b><br />',
-                    pointFormat: 'x = {point.x}, y = {point.y}'
-                },
-                
-                series: [{            
-                    data,
-                    pointStart: 0,
-                    name: '指标公式图',
-                }]
-            });
+            var y_1 = parseFloat((xValue[i+1]) * kValue[i]) + parseFloat(bValue[i]);
+            y_1 = y_1.toFixed(2);
+            data.push([parseFloat(xValue[i+1]), parseFloat(y_1)]);
+            // console.log(parseFloat(xValue[i+1]));
+            // console.log(parseFloat(y_1));
         }
-    });
-    {% endif %}
+
+        $('#LineContainer_test').highcharts({
+            chart: {
+                height:263, 
+                backgroundColor: '#f0f0f0'
+            },
+            credits: {
+                enabled: false
+            },
+            
+            title: {
+                text: ' '
+            },
+            
+            xAxis: {
+                minorTickInterval: 1,
+                tickInterval: 5,
+            },
+            
+            yAxis: {
+                type: 'linear',
+                minorTickInterval: 0.1,
+                tickInterval: 5,
+                title:{
+                    enabled: false,
+                    text: 'y值'
+                }
+            },
+
+            legend: {
+                layout: 'vertical',
+                backgroundColor: '#f0f0f0',
+                floating: true,
+                align: 'left',
+                x: 30,
+                verticalAlign: 'top',
+                y: 30
+            },
+
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br />',
+                pointFormat: 'x = {point.x}, y = {point.y}'
+            },
+            
+            series: [{            
+                data,
+                pointStart: 0,
+                name: '指标公式图',
+            }]
+        });
+    }
+});
+{% endif %}
 </script>
     </body>
 </html>
