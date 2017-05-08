@@ -4,9 +4,7 @@ import os
 import xlrd
 import xlwt
 import sys
-
 import operator
-
 import StringIO
 
 # reference:
@@ -76,10 +74,7 @@ def file_211_985():
 
             if flag == False:
                 target_sheet.write((total_students), 4, 0)
-    # output = StringIO.StringIO()
-    # target_data.save(output)
-    # output.seek(0)
-    # output.getvalue()
+                
     print "total students = ",total_students
     print "[2014-2016]count_211_985 = ", count_211_985
     target_data.save("target_file.xls")
