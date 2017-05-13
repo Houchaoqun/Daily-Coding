@@ -1,5 +1,0 @@
-要使用以上代码，你需配置如下环境：
-1、python：2.7.11（2.7系列即可）
-2、django：1.6.11
-
-参考网址：http://blog.csdn.net/houchaoqun_xmu/article/details/53693347
