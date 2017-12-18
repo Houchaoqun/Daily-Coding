@@ -1,0 +1,95 @@
+%% start of file `template_en.tex'.
+%% Copyright 2006-1008 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+\documentclass[11pt,a4paper]{moderncv}
+
+% moderncv themes
+\moderncvtheme[blue]{classic}                 % optional argument are 'blue' (default), 'orange', 'red', 'green', 'grey' and 'roman' (for roman fonts, instead of sans serif fonts)
+%\moderncvtheme[green]{classic}                % idem
+
+% character encoding
+\usepackage[utf8]{inputenc}                   % replace by the encoding you are using
+
+% adjust the page margins
+\usepackage[scale=0.8]{geometry}
+%\setlength{\hintscolumnwidth}{3cm} % if you want to change the width of the column with the dates
+%\AtBeginDocument{\setlength{\maketitlenamewidth}{6cm}}  % only for the classic theme, if you want to change the width of your name placeholder (to leave more space for your address details
+\AtBeginDocument{\recomputelengths}                     % required when changes are made to page layout lengths
+
+% personal data
+\firstname{Huaidong}
+\familyname{Tang}
+\title{Resume }               % optional, remove the line if not wanted
+\address{BUPT of Haidian district, Beijing,China}{100876}    % optional, remove the line if not wanted
+\mobile{13810496833}                    % optional, remove the line if not wanted
+\phone{010-62286960}                      % optional, remove the line if not wanted
+%\fax{fax (optional)}                          % optional, remove the line if not wanted
+\email{tanghuaidong@gmail.com}                      % optional, remove the line if not wanted
+\extrainfo{Already recommended for admission to be a postgraduate
+} % optional, remove the line if not wanted
+\photo[64pt]{face.jpg}                         % '64pt' is the height the picture must be resized to and 'picture' is the name of the picture file; optional, remove the line if not wanted
+\quote{Job intention: Intern}                 % optional, remove the line if not wanted
+
+\nopagenumbers{}                             % uncomment to suppress automatic page numbering for CVs longer than one page
+
+
+%----------------------------------------------------------------------------------
+%            content
+%----------------------------------------------------------------------------------
+\begin{document}
+\maketitle
+
+\section{Education}
+\cventry{2006--2010}{Bachelor}{Beijing Universtiy of Posts and Telecommunications}{Beijing}{\textit{GPA: 3.76/4.0}}{\textbf{Main Course: }C++ Programming, Java, Linux advanced Programming, Digital Signal Processing, Computer Network, Database Application, Communication Theroy and etc.}  % arguments 3 to 6 are optional
+
+
+\section{Experience}
+\subsection{Project Experience}
+\cventry{2006--2007}{C++ Program}{"Jin Orchestra"}{}{}{Used C++ to write a console game, similar to Jin Orchestra}                % arguments 3 to 6 are optional
+\cventry{2006--2007}{Data-base}{"Library Management System"}{}{}{used PowerBuilder, SQL server to finish a samll library management system.}                % arguments 3 to 6 are optional
+\cventry{2007--2008}{Monolithic machine}{"Innovative Experiment"}{}{}{achieved a small CNC storage room and solar irrigation system, in the innovative Experiment.}                % arguments 3 to 6 are optional
+\cventry{2008--2009}{Hardware system}{"A simple scanning tunneling microscope"}{}{}{produced a simple scanning tunneling microscope with some students from Shangdong University.}                % arguments 3 to 6 are optional
+\subsection{Social Experience}
+\cventry{2007--2008}{Intern}{Xuzhou Construction Machinery Group}{Xuzhou}{}{Internship at the Xuzhou Construction Machinery Group\newline{}Mainly in the engine room}% arguments 3 to 6 are optional
+
+\section{Languages}
+\cvlanguage{English}{CET4}{544/710}
+\cvlanguage{English}{CET6}{510/710}
+
+
+\section{Computer skills}
+\cvcomputer{Operate system:}{Linux,Windows}{Office:}{Ms Word, Excel, Powerpoint, Visio,OpenOffice, Latex}
+\cvcomputer{Programming Languages:}{C/C++, Java(a little)}{Data-base:}{Microsoft SQL Server, PowerBuilder, MySQL}
+\cvcomputer{Script:}{matlab script,vim script,flash script}{Engineer:}{Matlab, Simulink, QuartusII}
+
+\section{Interests}
+\cvline{Music}{\small Listen music such as light music, piano and etc. to relax myself}
+\cvline{Ping-Pong}{\small Always Play Ping-Pong to build up my body}
+\cvline{Tour}{\small Like to travel around to enwild my knowledge}
+
+\renewcommand{\listitemsymbol}{-} % change the symbol for lists
+
+\section{Hornor}
+\cvlistitem[*]{2006-2007 National inspirational Scholarship}
+\cvlistitem[*]{2007-2008 National inspirational Scholarship}
+\cvlistitem[*]{2008-2009 National inspirational Scholarship}            % optional other symbol
+
+\section{Self-presentation}
+\cvlistdoubleitem[\Neutral]{Hard-working}{Optimistic}
+\cvlistdoubleitem[\Neutral]{Self-confidence}{Ambitious attitude essential}
+\cvlistdoubleitem[\Neutral]{Dedication}{Dynamic and honest}
+
+% Publications from a BibTeX file
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{publications}       % 'publications' is the name of a BibTeX file
+
+\end{document}
+
+
+%% end of file `template_en.tex'.
