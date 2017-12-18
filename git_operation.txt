@@ -1,0 +1,14 @@
+=== 相关命令 ===
+git init
+git add .
+git commit -m "注释"
+git remote add origin https://url
+git pull origin master
+git push -u origin master
+
+=== 上传代码 === push
+git add .
+git commit -m "注释"
+git push -u origin master
+
+=== 更新代码 === pull
