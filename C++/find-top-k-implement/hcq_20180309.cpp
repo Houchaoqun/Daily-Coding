@@ -18,18 +18,19 @@ typedef struct
 
 class paixu
 {
+	
 public:
 	void input(sqlist&l);
 	void output(sqlist&l);
 	
 	int Partition( sqlist &L, int low, int high ) 
-	{															//对排序区间L.R[low..high]进行一次分区，返回基准位置下标
+	{														//对排序区间L.R[low..high]进行一次分区，返回基准位置下标
 		pivotkey=L.r[low].key;
 		i=low;
 		j=high;
 		L.r[0]=L.r[low];
 		while(i<j)
-		{  
+		{
 			while(j>i&&L.r[j].key>=pivotkey)j--;		//i指向基准,j向左扫描 
 			L.r[i]=L.r[j];
 			//temp=L.r[j].key;							// 比基准小的记录移到低端                           
