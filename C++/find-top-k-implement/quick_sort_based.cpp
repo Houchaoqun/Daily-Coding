@@ -5,19 +5,21 @@ using namespace std;
 #define MAXLENGTH 1000
 int _array[MAXLENGTH] = {0};
 int _len;
-int k = 5;
+int K;
 int result = 0;
 
 void get_data(){
 	fstream in_data;
 	in_data.open("data.txt");
 	in_data >> _len;
+	in_data >> K;
 	for(int i = 0; i < _len; i++){
 		in_data >> _array[i];
 	}
 }
 
 void print_data(){
+	cout<<"_len = "<<_len<<"; K = "<<K<<endl;
 	for(int i = 0; i<_len; i++){
 		cout<<_array[i]<<" ";
 	}
@@ -66,10 +68,10 @@ void Q_sort(int start, int end){
 	// cout<<"call Q_sort function..."<<endl;
 	if(start < end){
 		int pivotkey_index = partition(start, end);
-		cout<<"pivotkey_index = "<<pivotkey_index<<endl; 
-		if(pivotkey_index+1 == k){
+		// cout<<"pivotkey_index = "<<pivotkey_index<<endl; 
+		if(pivotkey_index+1 == K){
 			result = _array[pivotkey_index];
-		}else if(pivotkey_index+1 > k){
+		}else if(pivotkey_index+1 > K){
 			Q_sort(0, pivotkey_index-1);
 		}else{
 			Q_sort(pivotkey_index+1, end);
@@ -82,14 +84,14 @@ void Q_sort(int start, int end){
 
 int main(){
 	get_data();
-	cout<<"original array..."<<endl;
+//	cout<<"original array..."<<endl;
 	print_data();
 	
 	Q_sort(0, _len-1);
 //	cout<<"after sort..."<<endl;
 //	print_data();
 	
-	cout<<"result = "<<result<<endl;
+	cout<<"the "<<K<<"th number = "<<result<<endl;
 	return 0;
 }
 
