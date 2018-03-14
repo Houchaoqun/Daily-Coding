@@ -6,7 +6,8 @@
 using namespace std;
 
 #define  MAXNUM 20
-void getSource(int &n,char x[],int &m,char y[])
+
+void getSource(int &n, char x[], int &m, char y[])
 {
 	ifstream readChar;
 	readChar.open("./source2.txt");
@@ -94,16 +95,16 @@ int main()
 
 		// n<----->i----->x[]
 		// m<----->j----->y[]
-		if (c[n][m]==c[n-1][m])//该位置的数等于上一行同一列的数的情况
-		{
+		if (c[n][m]==c[n-1][m])
+		{//该位置的数等于上一行同一列的数的情况
 			n--;    //往上一行移动
 		}
 		else if (c[n][m]==c[n][m-1])
 		{
 			m--;    //往左一列移动
 		}
-		else   //当且仅当该位置的左和上方向的数字都与该位置不一样的情况：就是有递推公式第二步得到的----》i,j>0 and xi==yj
-		{
+		else   
+		{ //当且仅当该位置的左和上方向的数字都与该位置不一样的情况：就是有递推公式第二步得到的----》i,j>0 and xi==yj
 			s[--k]=x[n-1];    //  n《----》i
 			n--;	//沿该位置的对角线移动
 			m--;
