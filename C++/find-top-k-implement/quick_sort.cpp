@@ -62,21 +62,6 @@ int partition(int start, int end){
 }
 
 int Q_sort(int start, int end){
-	
-//	if(start < end){
-//		int pivotkey_index = partition(start, end);
-//		cout<<"pivotkey_index = "<<pivotkey_index<<endl; 
-//		if(pivotkey_index+1 == k){
-//			return _array[pivotkey_index];
-//		}else if(pivotkey_index+1 > k){
-//			Q_sort(0, pivotkey_index-1);
-//		}else{
-//			Q_sort(pivotkey_index+1, end);
-//		}
-//	}
-//	
-//	return 0;
-
 	if(start < end){
 		int pivotkey_index = partition(start, end);
 		cout<<"pivotkey_index = "<<pivotkey_index<<endl;

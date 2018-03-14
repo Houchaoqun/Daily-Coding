@@ -64,6 +64,7 @@ int partition(int start, int end){
 	return pivotkey_index;
 }
 
+// find-top-k 
 void Q_sort(int start, int end){
 	// cout<<"call Q_sort function..."<<endl;
 	if(start < end){
