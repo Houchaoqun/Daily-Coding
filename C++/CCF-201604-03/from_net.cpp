@@ -36,7 +36,6 @@ void formalize(vector<string> &stk, string path) {
     string dir;
     bool first = true;
     while(getline(ss, dir, '/')) {
-//    	cout<<dir<<"|||"<<&stk<<endl;
         if(dir.empty()) {
             if (first) stk = vector<string>();
         }
@@ -54,10 +53,6 @@ void formalize(vector<string> &stk, string path) {
 }
 
 int main() {
-//    int N;
-//    cin >> N;
-//    string current, relative;
-//    cin >> current;
 	input();
     vector<string> stk, newStk;
     formalize(stk, current);
