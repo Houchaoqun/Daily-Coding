@@ -85,12 +85,9 @@ void Q_sort(int start, int end){
 
 int main(){
 	get_data();
-//	cout<<"original array..."<<endl;
 	print_data();
 	
 	Q_sort(0, _len-1);
-//	cout<<"after sort..."<<endl;
-//	print_data();
 	
 	cout<<"the "<<K<<"th number = "<<result<<endl;
 	return 0;
