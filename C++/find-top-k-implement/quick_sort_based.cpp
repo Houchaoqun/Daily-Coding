@@ -92,8 +92,3 @@ int main(){
 	cout<<"the "<<K<<"th number = "<<result<<endl;
 	return 0;
 }
-
-
-
-
-

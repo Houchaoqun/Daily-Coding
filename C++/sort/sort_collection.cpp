@@ -1,16 +1,17 @@
 // 排序的基本操作.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <iostream>
 using namespace std;
 #define maxsize 1000
 typedef int keytype;
+
 typedef struct 
 {
 	keytype key;
 	//infotype otherinfo;
 }rcdtype;
+
 typedef struct
 {
 	rcdtype r[maxsize+1];  //r[0]置闲  用作岗哨项
@@ -23,6 +24,7 @@ class paixu
 public:
 	void input(sqlist&l);
 	void output(sqlist&l);
+	
 //************希尔排序****************
 	void shellinsert(sqlist&L,int dk)
 	{
@@ -41,6 +43,8 @@ public:
 		shellinsert(L, dlta[k]);			//一趟增量为dlta[k]的插入排序
 	}										// ShellSort
 //***********************************
+
+
 //***********冒泡排序****************
 	void BubbleSort(sqlist&L) 
 	{										//对顺序表L作冒泡排序
@@ -48,21 +52,22 @@ public:
 		//	cin>>L.r[i].key;
 		for(i=2;i<=L.length;i++)
 		{									//进行n－1趟扫描
-			cout<<"length"<<L.length<<endl;
-			move=0;							//move是交换与否的标志     
-			for(j=L.length;j<=i;j--) 
+			// cout<<"length"<<L.length<<endl;
+			bool is_finished=true;							//move是交换与否的标志     
+			for(j=L.length;j>=i;j--) 
 				if(L.r[j].key<L.r[j-1].key) 
 				{							//如逆序则交换 
 					temp=L.r[j].key;
 					L.r[j].key=L.r[j-1].key;
 					L.r[j-1].key=temp;
-					move=1;
+					is_finished = false;
 				}
 				//cout<<L.r[i].key<<" ";
-			if(!move)return;				//如果没有移动发生，则结束
+			if(is_finished)return;				//如果没有移动发生，则结束
 		}
 	}
 //************************************
+
 //*************快速排序--分区算法的改进******
 	int Partition( sqlist  &L, int low, int high ) 
 	{															//对排序区间L.R[low..high]进行一次分区，返回基准位置下标
@@ -103,13 +108,16 @@ public:
 	}
 
 //****************快速排序结束*************************
+
+
 private:
 	int n,i,j,k;
-	int move,temp;
+	int temp;
 	int pivotkey;
 	int pivotloc;
 	//sqlist *temp;
 };
+ 
 void paixu::input(sqlist&l)
 {
 	cout<<"输入数据个数length：";
@@ -118,6 +126,7 @@ void paixu::input(sqlist&l)
 	for(i=1;i<=l.length;i++)
 		cin>>l.r[i].key;
 }
+
 void paixu::output(sqlist&l)
 {
 	for(i=1;i<=l.length;i++)
@@ -129,15 +138,18 @@ int main(int argc, char* argv[])
 {
 	paixu p;
 	sqlist l;
+	
 	p.input(l);
 	//****************************************
 	p.BubbleSort(l);
 	cout<<"经冒泡排序后的顺序为："<<endl;
 	p.output(l);
+	
 	//****************************************
 	p.quicksort(l);
 	cout<<"经快速排序改进版后的顺序为："<<endl;
 	p.output(l);
+	
 	//****************************************
 	int a[3]={1,3,5};
 	p.ShellSort(l,a,l.length);
