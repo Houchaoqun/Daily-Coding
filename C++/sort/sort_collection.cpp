@@ -2,7 +2,9 @@
 //
 
 #include <iostream>
+#include <fstream> 
 using namespace std;
+
 #define maxsize 1000
 typedef int keytype;
 
@@ -24,26 +26,6 @@ class paixu
 public:
 	void input(sqlist&l);
 	void output(sqlist&l);
-	
-//************希尔排序****************
-	void shellinsert(sqlist&L,int dk)
-	{
-	for(i=dk+1;i<=n;++i)
-		if(L.r[i].key<L.r[i-dk].key)
-		{
-			L.r[0]=L.r[i];					// 暂存在R[0]
-			for(j=i-dk;j>0&&(L.r[0].key<L.r[j].key);j-=dk)
-				L.r[j+dk]=L.r[j];			// 记录后移，查找插入位置
-			L.r[j+dk]=L.r[0];               // 插入
-		}									// if
-	}										// ShellInsert
-	void ShellSort (sqlist &L, int dlta[], int t)
-	{										// 增量为dlta[]的希尔排序
-	for (k=0; k<t; ++k)
-		shellinsert(L, dlta[k]);			//一趟增量为dlta[k]的插入排序
-	}										// ShellSort
-//***********************************
-
 
 //***********冒泡排序****************
 	void BubbleSort(sqlist&L) 
@@ -66,10 +48,28 @@ public:
 			if(is_finished)return;				//如果没有移动发生，则结束
 		}
 	}
+	
+	void BubbleSort2(sqlist&L) 
+	{									
+		
+		for(i=L.length; i>1; i--)
+		{
+			bool is_finished=true;    
+			for(j=1; j<i; j++) 
+				if(L.r[j].key>L.r[j+1].key) 
+				{
+					temp=L.r[j].key;
+					L.r[j].key=L.r[j+1].key;
+					L.r[j+1].key=temp;
+					is_finished = false;
+				}
+			if(is_finished) return;
+		}
+	}
 //************************************
 
 //*************快速排序--分区算法的改进******
-	int Partition( sqlist  &L, int low, int high ) 
+	int Partition(sqlist  &L, int low, int high) 
 	{															//对排序区间L.R[low..high]进行一次分区，返回基准位置下标
 		pivotkey=L.r[low].key;
 		i=low;
@@ -102,13 +102,39 @@ public:
 	  }
 } 
 //**********对整个顺序表进行快速排序算法**************
-	void quicksort(sqlist&l)
+	void  QuickSort(sqlist&l)
 	{
 		QSort(l,1,l.length);
 	}
 
 //****************快速排序结束*************************
 
+
+//************希尔排序****************
+	void ShellInsert(sqlist&L, int dk)
+	{
+		for(i=dk+1; i<=L.length; ++i)
+			if(L.r[i].key < L.r[i-dk].key)
+			{
+				L.r[0]=L.r[i];					// 暂存在R[0]
+				for(j=i-dk; j>0 && (L.r[0].key<L.r[j].key); j-=dk)
+					L.r[j+dk]=L.r[j];			// 记录后移，查找插入位置
+				L.r[j+dk]=L.r[0];               // 插入
+			}
+//			output(L);
+	}
+	
+	void ShellSort (sqlist &L, int dlta[], int t)
+	{										// 增量为dlta[]的希尔排序
+		for (k=0; k<t; ++k)
+		{
+			cout<<"===== dlta = "<<dlta[k]<<" ====="<<endl;
+			ShellInsert(L, dlta[k]);	    //一趟增量为dlta[k]的插入排序
+			output(L);
+		}
+			
+	}										// ShellSort
+//***********************************
 
 private:
 	int n,i,j,k;
@@ -120,11 +146,13 @@ private:
  
 void paixu::input(sqlist&l)
 {
-	cout<<"输入数据个数length：";
-	cin>>l.length;
-	cout<<"输入无序的length个数："<<endl;
+	ifstream in_data;
+	in_data.open("./data2.txt");
+//	cout<<"输入数据个数length：";
+	in_data>>l.length;
+//	cout<<"输入无序的length个数："<<endl;
 	for(i=1;i<=l.length;i++)
-		cin>>l.r[i].key;
+		in_data>>l.r[i].key;
 }
 
 void paixu::output(sqlist&l)
@@ -137,24 +165,23 @@ void paixu::output(sqlist&l)
 int main(int argc, char* argv[])
 {
 	paixu p;
-	sqlist l;
+	sqlist l1, l2, l3;
 	
-	p.input(l);
-	//****************************************
-	p.BubbleSort(l);
+	p.input(l1);
+	p.BubbleSort2(l1);
 	cout<<"经冒泡排序后的顺序为："<<endl;
-	p.output(l);
+	p.output(l1);
 	
-	//****************************************
-	p.quicksort(l);
+	p.input(l2);
+	p.QuickSort(l2);
 	cout<<"经快速排序改进版后的顺序为："<<endl;
-	p.output(l);
+	p.output(l2);
 	
-	//****************************************
-	int a[3]={1,3,5};
-	p.ShellSort(l,a,l.length);
+	p.input(l3);
+	int a[3] = {5,3,1};
 	cout<<"经希尔排序后的顺序为："<<endl;
-	p.output(l);
+	p.ShellSort(l3, a, 3);
+	p.output(l3);
 
 	system("pause");
 	return 0;
