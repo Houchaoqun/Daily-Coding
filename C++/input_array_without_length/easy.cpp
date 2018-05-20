@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -45,7 +46,9 @@ void input_ifstream(){
 int main(){
 	
 //	input_cin();
-	input_ifstream();
-	display();
+//	input_ifstream();
+//	display();
+	double RateVariation = float(rand()%100)/100;
+	cout<< RateVariation <<endl;
 	return 0;
 }
